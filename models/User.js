@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs")
-const usersCollection = require('../db').db("UserProfile").collection("User")
+const usersCollection = require('../db').db().collection("users")
 const validator = require("validator")
 const md5 = require('md5')
 
@@ -67,13 +67,10 @@ User.prototype.login = function() {
 }
 User.getUsers = function(){
   return new Promise(async (resolve, reject) => {
-    //let userLists = await usersCollection.findOne({email: 'mansi@test.com'});
-    let userListsResult = [];
-    let userLists = usersCollection.find({});
-    await userLists.forEach(ss =>{
-      userListsResult.push(ss);
-    })
-    resolve(userListsResult)
+    let userLists = await usersCollection.findOne({email: 'mansi@test.com'});
+   // let userLists = await usersCollection;
+    console.log("userLists", userLists);
+    resolve(userLists)
   })
   
 }
